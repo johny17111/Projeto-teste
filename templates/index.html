@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Platform - Home</title>
+    <title>Exam Platform - Test Your Knowledge</title>
     <style>
         * {
             margin: 0;
@@ -13,287 +13,789 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* Navbar Styles */
+        nav {
+            background-color: #2c3e50;
+            padding: 0 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        nav .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav .nav-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        nav .nav-links a:hover {
+            color: #3498db;
+        }
+
+        nav .user-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        nav .btn-login {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav .btn-login:hover {
+            background-color: #2980b9;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            color: white;
+            padding: 60px 20px;
+            border-radius: 10px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        /* Search Section */
+        .search-section {
+            margin-bottom: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-section h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .search-container button {
+            padding: 12px 30px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            background-color: #2980b9;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        /* Questions Section */
+        .questions-section {
+            margin-bottom: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .questions-section h2 {
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .questions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .question-card {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .question-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .question-card h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .question-card p {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .question-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #95a5a6;
+        }
+
+        .difficulty {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .difficulty.easy {
+            background-color: #d5f4e6;
+            color: #27ae60;
+        }
+
+        .difficulty.medium {
+            background-color: #fef5e7;
+            color: #f39c12;
+        }
+
+        .difficulty.hard {
+            background-color: #fadbd8;
+            color: #e74c3c;
+        }
+
+        .question-card button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .question-card button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Exams Section */
+        .exams-section {
+            margin-bottom: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .exams-section h2 {
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .exams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .exam-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .exam-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: move 20s linear infinite;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(20px, 20px);
+            }
+        }
+
+        .exam-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .exam-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .exam-card p {
+            font-size: 14px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .exam-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 15px;
+        }
+
+        .exam-stats span {
             display: flex;
             flex-direction: column;
         }
 
-        header {
-            background-color: rgba(0, 0, 0, 0.7);
+        .exam-stats span strong {
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .exam-card button {
+            width: 100%;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            border: 2px solid white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 30px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
+        .exam-card button:hover {
+            background-color: white;
             color: #667eea;
         }
 
-        main {
-            flex: 1;
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .hero {
-            background: white;
-            padding: 60px 40px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .hero h1 {
-            color: #333;
-            font-size: 42px;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            color: #666;
-            font-size: 18px;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 12px 40px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background-color: #667eea;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background-color: #764ba2;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #63408b;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .feature-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
+        /* Footer */
         footer {
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 40px 20px;
             margin-top: 50px;
         }
 
-        .stats {
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 50px 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .stat-box {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: #3498db;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 20px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            color: #95a5a6;
         }
 
-        .stat-number {
-            font-size: 36px;
-            font-weight: bold;
-            color: #667eea;
+        .footer-bottom p {
             margin-bottom: 10px;
         }
 
-        .stat-label {
-            color: #666;
-            font-size: 14px;
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
         }
 
+        .social-links a {
+            color: #3498db;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #2980b9;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .header-content {
+            nav {
                 flex-direction: column;
-                text-align: center;
+                height: auto;
+                padding: 15px 20px;
+                gap: 15px;
             }
 
-            nav a {
-                margin-left: 15px;
+            nav .nav-links {
+                flex-direction: column;
+                gap: 10px;
             }
 
             .hero h1 {
-                font-size: 28px;
+                font-size: 32px;
             }
 
-            .cta-buttons {
+            .questions-grid,
+            .exams-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-container {
                 flex-direction: column;
             }
 
-            .btn {
-                width: 100%;
+            .filter-options {
+                flex-direction: column;
             }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #7f8c8d;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2c3e50;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo">📚 ExamHub</div>
-            <nav>
-                <a href="#features">Features</a>
-                <a href="#login">Login</a>
-                <a href="#register">Register</a>
-            </nav>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#" class="logo">📚 ExamHub</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#questions">Questions</a></li>
+            <li><a href="#exams">Exams</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="user-menu">
+            <button class="btn-login">Sign Up / Login</button>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section class="hero">
-            <h1>Welcome to ExamHub</h1>
-            <p>Your comprehensive online exam and assessment platform. Create, manage, and take exams with ease.</p>
-            <div class="cta-buttons">
-                <button class="btn btn-primary" onclick="window.location.href='/login'">Login</button>
-                <button class="btn btn-secondary" onclick="window.location.href='/register'">Create Account</button>
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to ExamHub</h1>
+        <p>Master your knowledge with our comprehensive exam platform</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Search Section -->
+        <section class="search-section" id="search">
+            <h2>🔍 Find Exams & Questions</h2>
+            <div class="search-container">
+                <input type="text" placeholder="Search for exams, subjects, or topics...">
+                <button>Search</button>
+            </div>
+            <div class="filter-options">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Programming</button>
+                <button class="filter-btn">Mathematics</button>
+                <button class="filter-btn">Science</button>
+                <button class="filter-btn">History</button>
+                <button class="filter-btn">Languages</button>
             </div>
         </section>
 
-        <section id="features" class="features">
-            <div class="feature-card">
-                <div class="feature-icon">✍️</div>
-                <h3>Easy Exam Creation</h3>
-                <p>Create and customize exams with multiple question types. Manage difficulty levels and time limits effortlessly.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Detailed Analytics</h3>
-                <p>Track student performance with comprehensive reports and detailed statistics for better insights.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Secure & Reliable</h3>
-                <p>Enterprise-grade security ensures your exam data is protected with encryption and secure authentication.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Real-time Monitoring</h3>
-                <p>Monitor exams in real-time, see student progress, and manage the examination process seamlessly.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3>Mobile Friendly</h3>
-                <p>Access exams from any device. Our responsive design works perfectly on desktop, tablet, and mobile.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎓</div>
-                <h3>Multi-user Support</h3>
-                <p>Support for instructors, students, and administrators with role-based access controls.</p>
+        <!-- Questions Section -->
+        <section class="questions-section" id="questions">
+            <h2>📝 Popular Questions</h2>
+            <div class="questions-grid">
+                <!-- Question Card 1 -->
+                <div class="question-card">
+                    <h3>What is Object-Oriented Programming?</h3>
+                    <p>Explain the core concepts of OOP including encapsulation, inheritance, and polymorphism.</p>
+                    <div class="question-meta">
+                        <span>Programming</span>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                    <button>Answer Question</button>
+                </div>
+
+                <!-- Question Card 2 -->
+                <div class="question-card">
+                    <h3>Solve: Quadratic Equations</h3>
+                    <p>Find the roots of a quadratic equation using the quadratic formula and complete the square.</p>
+                    <div class="question-meta">
+                        <span>Mathematics</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <button>Answer Question</button>
+                </div>
+
+                <!-- Question Card 3 -->
+                <div class="question-card">
+                    <h3>DNA Structure and Replication</h3>
+                    <p>Describe the double helix structure of DNA and explain the process of DNA replication.</p>
+                    <div class="question-meta">
+                        <span>Science</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <button>Answer Question</button>
+                </div>
+
+                <!-- Question Card 4 -->
+                <div class="question-card">
+                    <h3>Advanced: Quantum Computing</h3>
+                    <p>Explain superposition, entanglement, and quantum gates in the context of quantum computing.</p>
+                    <div class="question-meta">
+                        <span>Programming</span>
+                        <span class="difficulty hard">Hard</span>
+                    </div>
+                    <button>Answer Question</button>
+                </div>
+
+                <!-- Question Card 5 -->
+                <div class="question-card">
+                    <h3>French Grammar: Past Tense</h3>
+                    <p>Master the usage of Passé Composé and Imparfait in French with practical examples.</p>
+                    <div class="question-meta">
+                        <span>Languages</span>
+                        <span class="difficulty medium">Medium</span>
+                    </div>
+                    <button>Answer Question</button>
+                </div>
+
+                <!-- Question Card 6 -->
+                <div class="question-card">
+                    <h3>World War II: Key Events</h3>
+                    <p>Discuss the major turning points and key events that shaped World War II's outcome.</p>
+                    <div class="question-meta">
+                        <span>History</span>
+                        <span class="difficulty easy">Easy</span>
+                    </div>
+                    <button>Answer Question</button>
+                </div>
             </div>
         </section>
 
-        <section class="stats">
-            <div class="stat-box">
-                <div class="stat-number">10K+</div>
-                <div class="stat-label">Active Users</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">5K+</div>
-                <div class="stat-label">Exams Created</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">100K+</div>
-                <div class="stat-label">Tests Completed</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number">99.9%</div>
-                <div class="stat-label">Uptime</div>
+        <!-- Exams Section -->
+        <section class="exams-section" id="exams">
+            <h2>🎯 Featured Exams</h2>
+            <div class="exams-grid">
+                <!-- Exam Card 1 -->
+                <div class="exam-card">
+                    <div class="exam-card-content">
+                        <h3>JavaScript Fundamentals</h3>
+                        <p>Test your knowledge of JavaScript basics, DOM manipulation, and ES6 features.</p>
+                        <div class="exam-stats">
+                            <span>
+                                Questions
+                                <strong>25</strong>
+                            </span>
+                            <span>
+                                Duration
+                                <strong>60 min</strong>
+                            </span>
+                            <span>
+                                Difficulty
+                                <strong>Medium</strong>
+                            </span>
+                        </div>
+                        <button>Start Exam</button>
+                    </div>
+                </div>
+
+                <!-- Exam Card 2 -->
+                <div class="exam-card">
+                    <div class="exam-card-content">
+                        <h3>Calculus I Final</h3>
+                        <p>Comprehensive exam covering limits, derivatives, integrals, and applications.</p>
+                        <div class="exam-stats">
+                            <span>
+                                Questions
+                                <strong>30</strong>
+                            </span>
+                            <span>
+                                Duration
+                                <strong>90 min</strong>
+                            </span>
+                            <span>
+                                Difficulty
+                                <strong>Hard</strong>
+                            </span>
+                        </div>
+                        <button>Start Exam</button>
+                    </div>
+                </div>
+
+                <!-- Exam Card 3 -->
+                <div class="exam-card">
+                    <div class="exam-card-content">
+                        <h3>Biology: Genetics & Evolution</h3>
+                        <p>Explore heredity, mutations, natural selection, and evolutionary processes.</p>
+                        <div class="exam-stats">
+                            <span>
+                                Questions
+                                <strong>20</strong>
+                            </span>
+                            <span>
+                                Duration
+                                <strong>45 min</strong>
+                            </span>
+                            <span>
+                                Difficulty
+                                <strong>Medium</strong>
+                            </span>
+                        </div>
+                        <button>Start Exam</button>
+                    </div>
+                </div>
+
+                <!-- Exam Card 4 -->
+                <div class="exam-card">
+                    <div class="exam-card-content">
+                        <h3>English Literature</h3>
+                        <p>Comprehensive assessment of classic literature, poetry, and literary analysis skills.</p>
+                        <div class="exam-stats">
+                            <span>
+                                Questions
+                                <strong>28</strong>
+                            </span>
+                            <span>
+                                Duration
+                                <strong>75 min</strong>
+                            </span>
+                            <span>
+                                Difficulty
+                                <strong>Medium</strong>
+                            </span>
+                        </div>
+                        <button>Start Exam</button>
+                    </div>
+                </div>
             </div>
         </section>
-    </main>
+    </div>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 ExamHub Platform. All rights reserved.</p>
-        <p>Privacy Policy | Terms of Service | Contact Us</p>
+        <div class="footer-content">
+            <!-- About Section -->
+            <div class="footer-section">
+                <h4>About ExamHub</h4>
+                <p>ExamHub is a comprehensive online platform designed to help students prepare for exams with practice questions, mock tests, and detailed solutions.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#exams">Browse Exams</a></li>
+                    <li><a href="#questions">Practice Questions</a></li>
+                    <li><a href="#results">My Results</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#help">Help Center</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="footer-section">
+                <h4>Get in Touch</h4>
+                <ul>
+                    <li><a href="mailto:info@examhub.com">info@examhub.com</a></li>
+                    <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
+                    <li><a href="#">Support Center</a></li>
+                    <li><a href="#">Report a Bug</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 ExamHub. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Simple search functionality
+        document.querySelector('.search-container button').addEventListener('click', function() {
+            const searchQuery = document.querySelector('.search-container input').value;
+            if (searchQuery.trim()) {
+                console.log('Searching for:', searchQuery);
+                alert('Search functionality coming soon! You searched for: ' + searchQuery);
+            }
+        });
+
+        // Filter buttons functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                console.log('Filter selected:', this.textContent);
+            });
+        });
+
+        // Exam and Question button interactions
+        document.querySelectorAll('.question-card button, .exam-card button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Feature coming soon! You clicked: ' + this.textContent);
+            });
+        });
+
+        // Login button
+        document.querySelector('.btn-login').addEventListener('click', function() {
+            alert('Redirecting to login/signup page...');
+        });
+    </script>
 </body>
 </html>
